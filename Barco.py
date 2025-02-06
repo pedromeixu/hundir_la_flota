@@ -1,15 +1,18 @@
 class Barco:
-    tamaño: int
-    posicion: list
-    impactos: int
-
-    def __init__ (self, tamaño, posicion):
+    def __init__ (self, tamaño, coordenadas):
         self.tamaño = tamaño
-        self.posicion = posicion
-        self.impactos = 0
-    
+        self.coordenadas = coordenadas
+        self.impactos = []
+
+    def recibir_impacto (self, coordenada):
+        if coordenada in self.coordenadas:
+            self.impactos.append(coordenada)
+            return True
+        else:
+            return False
+            
     def hundido (self) -> bool:
-        if self.impactos == self.tamaño:
+        if len(self.impactos) == self.tamaño:
             return True
         else: 
             return False
