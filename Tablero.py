@@ -28,3 +28,6 @@ class Tablero:
                     return "Tocado"
         
         return "Fallaste"
+    
+    def mostrar_tablero (self, ocultar_barcos=True):
+        tablero = [["♥️" for i in range(self.tamaño)] for j in range(self.tamaño)]
