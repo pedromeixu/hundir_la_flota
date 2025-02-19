@@ -1,18 +1,36 @@
 from Barco import Barco
+import random
 class Tablero:
     def __init__(self, tamaño=5):
         self.tamaño = tamaño
         self.barcos = []
         self.disparos = []
 
-    def agregar_barcos(self, barco):
-        for b in self.barcos:
-            for coord_b in b.coordenadas:
-                for coord_nueva in barco.coordenadas:
-                    if coord_b == coord_nueva:
-                        raise ValueError("Ya hay un barco en esa posición")
-        self.barcos.append(barco)
+    def coordenadas_validas(self, barco):
+        for coord in barco.coordenadas:
+            if coord[0] < 0 or coord[0] >= self.tamaño or coord[1] < 0 or coord[1] >= self.tamaño:
+                return False
+            for b in self.barcos:
+                if coord in b.coordenadas:
+                    return False
+        return True
+    
+    def agregar_barco_aleatorio(self, barco):
+        direccion = random.choice ( ["horizontal", "vertical"] )
+        while True:
+            x = random.randint(0, self.tamaño -1)
+            y = random.randint(0, self.tamaño - 1)
 
+            if direccion == "horizontal":
+                if x + barco.tamaño <= self.tamaño:
+                    coordenadas = [(x + i, y) for i in range(barco.tamaño)]
+                else:
+                    continue
+            else:
+                if y + barco.tamaño <= self.tamaño:
+                    coordenadas = [(x, y + i) for i in range(barco.tamaño)]
+                else:
+                    continue
     
     def recibir_disparo(self, x, y):
         coordenadas = (x, y)
