@@ -47,3 +47,9 @@ class Tablero:
                 else:
                     print("♥️", end=" ")
             print()
+
+    def todos_barcos_hundidos(self):
+        for barco in self.barcos:
+            if not barco.esta_hundido():
+                return False
+        return True
