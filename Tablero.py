@@ -31,3 +31,19 @@ class Tablero:
     
     def mostrar_tablero (self, ocultar_barcos=True):
         tablero = [["♥️" for i in range(self.tamaño)] for j in range(self.tamaño)]
+
+        for y in range(self.tamaño):
+            for x in range(self.tamaño):
+                if (x, y) in self.disparos:
+                    recibe_disparo = False
+                    for barco in self.barcos:
+                        if (x, y) in barco.coordenadas:
+                            recibe_disparo = True
+                            break
+                    if recibe_disparo:
+                        print("X", end=" ")
+                    else:
+                        print("*", end=" ")
+                else:
+                    print("♥️", end=" ")
+            print()
