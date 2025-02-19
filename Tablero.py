@@ -18,7 +18,7 @@ class Tablero:
     def agregar_barco_aleatorio(self, barco):
         direccion = random.choice ( ["horizontal", "vertical"] )
         while True:
-            x = random.randint(0, self.tamaño -1)
+            x = random.randint(0, self.tamaño - 1)
             y = random.randint(0, self.tamaño - 1)
 
             if direccion == "horizontal":
@@ -31,6 +31,12 @@ class Tablero:
                     coordenadas = [(x, y + i) for i in range(barco.tamaño)]
                 else:
                     continue
+        
+            barco.coordenadas = coordenadas
+
+            if self.coordenadas_validas(barco):
+                self.barcos.append(barco)
+                break
     
     def recibir_disparo(self, x, y):
         coordenadas = (x, y)
