@@ -7,6 +7,9 @@ class Tablero:
         self.disparos = []
 
     def coordenadas_validas(self, barco) -> bool:
+        """
+        Verifica si las coordenadas de un barco son válidas en el tablero
+        """
         for coord in barco.coordenadas:
             if coord[0] < 0 or coord[0] >= self.tamaño or coord[1] < 0 or coord[1] >= self.tamaño:
                 return False
@@ -16,6 +19,9 @@ class Tablero:
         return True
     
     def agregar_barco_aleatorio(self, barco) -> None:
+        """
+        Coloca un barco en una posición aleatoria dentro del tablero.
+        """
         direccion = random.choice ( ["horizontal", "vertical"] )
         while True:
             x = random.randint(0, self.tamaño - 1)
@@ -39,6 +45,9 @@ class Tablero:
                 break
     
     def recibir_disparo(self, x: int, y: int) -> str:
+        """
+        Registra un disparo en el tablero y evalúa si impactó un barco.
+        """
         coordenadas = (x, y)
         if coordenadas in self.disparos:
             return "Ya disparaste ahí"
@@ -55,6 +64,9 @@ class Tablero:
         return "Fallaste"
     
     def mostrar_tablero (self) -> None:
+        """
+        Enseña el tablero
+        """
         tablero = [["♥️" for i in range(self.tamaño)] for j in range(self.tamaño)]
 
         for y in range(self.tamaño):
@@ -74,6 +86,9 @@ class Tablero:
             print()
 
     def todos_barcos_hundidos(self) -> bool:
+        """
+        Verifica si todos los barcos del tablero están hundidos
+        """
         for barco in self.barcos:
             if not barco.hundido():
                 return False
