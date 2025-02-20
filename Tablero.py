@@ -1,12 +1,12 @@
 from Barco import Barco
 import random
 class Tablero:
-    def __init__(self, tamaño=5):
+    def __init__(self, tamaño: int = 5) -> None:
         self.tamaño = tamaño
         self.barcos = []
         self.disparos = []
 
-    def coordenadas_validas(self, barco):
+    def coordenadas_validas(self, barco) -> bool:
         for coord in barco.coordenadas:
             if coord[0] < 0 or coord[0] >= self.tamaño or coord[1] < 0 or coord[1] >= self.tamaño:
                 return False
@@ -15,7 +15,7 @@ class Tablero:
                     return False
         return True
     
-    def agregar_barco_aleatorio(self, barco):
+    def agregar_barco_aleatorio(self, barco) -> None:
         direccion = random.choice ( ["horizontal", "vertical"] )
         while True:
             x = random.randint(0, self.tamaño - 1)
@@ -38,7 +38,7 @@ class Tablero:
                 self.barcos.append(barco)
                 break
     
-    def recibir_disparo(self, x, y):
+    def recibir_disparo(self, x: int, y: int) -> str:
         coordenadas = (x, y)
         if coordenadas in self.disparos:
             return "Ya disparaste ahí"
@@ -54,7 +54,7 @@ class Tablero:
         
         return "Fallaste"
     
-    def mostrar_tablero (self, ocultar_barcos=True):
+    def mostrar_tablero (self) -> None:
         tablero = [["♥️" for i in range(self.tamaño)] for j in range(self.tamaño)]
 
         for y in range(self.tamaño):
@@ -73,7 +73,7 @@ class Tablero:
                     print("♥️", end=" ")
             print()
 
-    def todos_barcos_hundidos(self):
+    def todos_barcos_hundidos(self) -> bool:
         for barco in self.barcos:
             if not barco.hundido():
                 return False
